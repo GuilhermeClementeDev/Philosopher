@@ -1,0 +1,3 @@
+return equivalente
+
+1 = input error (size, diff than numbers)

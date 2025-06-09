@@ -5,12 +5,14 @@ CFLAGS = -Wall -Wextra -Werror -g
 
 SRC_DIR = src
 
-REDIRECT_DIR = redirects
+LIB_DIR = lib
 
 LIBFT = $(LIB_DIR)/libft.a
 
 SRCS = \
-	$(SRC_DIR)/main.c \
+	main.c \
+	utilits_main.c \
+
 
 OBJS = $(SRCS:.c=.o)
 
