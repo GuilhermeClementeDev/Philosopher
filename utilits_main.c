@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 18:01:45 by guclemen          #+#    #+#             */
-/*   Updated: 2025/06/19 18:17:22 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/06/25 13:57:17 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	ft_create_forks(t_data *data)
 	}
 	return (1);
 }
-int	ft_create_philos(t_data *data)
+int	ft_build_philos_data(t_data *data)
 {
 	int	i;
 

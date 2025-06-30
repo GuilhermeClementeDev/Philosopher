@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 17:39:05 by guclemen          #+#    #+#             */
-/*   Updated: 2025/06/19 18:22:09 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/06/25 13:57:46 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ int		ft_isallnum(int argc, char **argv);
 int		ft_print_error(char *msg, int nbr);
 void	build_data(t_data *data, int argc, char **argv);
 int		ft_create_forks(t_data *data);
-int		ft_create_philos(t_data *data);
+int		ft_build_philos_data(t_data *data);
 
 #endif
