@@ -1,7 +1,7 @@
 NAME = philosophers
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -pthread
 
 SRC_DIR = src
 
@@ -12,7 +12,7 @@ LIBFT = $(LIB_DIR)/libft.a
 SRCS = \
 	main.c \
 	utilits_main.c \
-
+	threads_utilits.c \
 
 OBJS = $(SRCS:.c=.o)
 
@@ -28,6 +28,11 @@ $(NAME): $(OBJS) $(LIBFT)
 
 $(LIBFT):
 	@make -C $(LIB_DIR)
+
+valgrind: $(NAME)
+	valgrind --leak-check=full ./$(NAME) $(ARGS)
+helgrind: $(NAME)
+	$(VALGRIND) --tool=helgrind ./$(NAME) $(ARGS)
 
 clean:
 	@make -C $(LIB_DIR) clean

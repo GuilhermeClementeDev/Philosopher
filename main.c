@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 17:33:12 by guclemen          #+#    #+#             */
-/*   Updated: 2025/06/25 13:57:13 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/01 15:57:11 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,28 @@
 int	main(int argc, char **argv)
 {
 	t_data	data;
+	int		i;
 
+	i = 0;
 	if (argc < 5 || argc > 6)
-		return (ft_print_error("Invalid number of inputs\n", 1));
+		return (ft_error("Invalid number of inputs\n", 1, NULL));
 	if (!ft_isallnum(argc, argv))
-		return (ft_print_error("All arguments must be positive numbers\n", 1));
+		return (ft_error("All arguments must be positive numbers\n", 1, NULL));
 	build_data(&data, argc, argv);
 	if (!ft_create_forks(&data))
-		return (ft_print_error("Initializing mutex for fork\n", 1));
+		return (ft_error("Initializing mutex for fork\n", 1, &data));
 	if (!ft_build_philos_data(&data))
-		return (ft_print_error("Initializing philosophers failed\n", 1));
+		return (ft_error("Initializing philosophers failed\n", 1, &data));
+	if (!ft_create_threads(&data))
+		return (ft_error("Creating threads failed\n", 1, &data));
+	pthread_mutex_lock(&data.start_mutex);
+	data.start = 1;
+	pthread_mutex_unlock(&data.start_mutex);
+	while (i < data.num_philos)
+	{
+		pthread_join(data.philos[i].thread, NULL);
+		i++;
+	}
+	ft_error(NULL, 0, &data);
 	return (0);
 }

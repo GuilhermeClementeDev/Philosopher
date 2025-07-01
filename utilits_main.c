@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 18:01:45 by guclemen          #+#    #+#             */
-/*   Updated: 2025/06/25 13:57:17 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/01 16:02:36 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	ft_isallnum(int argc, char **argv)
 	}
 	return (1);
 }
+
 void	build_data(t_data *data, int argc, char **argv)
 {
 	data->num_philos = ft_atoi(argv[1]);
@@ -57,7 +58,10 @@ void	build_data(t_data *data, int argc, char **argv)
 		data->num_times_each_must_eat = -1;
 	}
 	data->someone_died = 0;
+	data->start = 0;
+	pthread_mutex_init(&data->start_mutex, NULL);
 }
+
 int	ft_create_forks(t_data *data)
 {
 	int	i;
@@ -66,15 +70,20 @@ int	ft_create_forks(t_data *data)
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->num_philos);
 	if (!data->forks)
 		return (1);
-
 	while (i < data->num_philos)
 	{
-		if (pthread_mutex_init(&data->forks[i], NULL))
+		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
+		{
+			while (--i >= 0)
+				pthread_mutex_destroy(&data->forks[i]);
+			free(data->forks);
 			return (0);
+		}
 		i++;
 	}
 	return (1);
 }
+
 int	ft_build_philos_data(t_data *data)
 {
 	int	i;
@@ -83,14 +92,14 @@ int	ft_build_philos_data(t_data *data)
 	data->philos = malloc(sizeof(t_philo) * data->num_philos);
 	if (!data->philos)
 		return (0);
-
-	while(i < data->num_philos)
+	while (i < data->num_philos)
 	{
 		data->philos[i].id = i;
 		data->philos[i].meals_eaten = 0;
 		data->philos[i].last_meal_time = 0;
 		data->philos[i].left_fork = &data->forks[i];
 		data->philos[i].right_fork = &data->forks[(i + 1) % data->num_philos];
+		data->philos[i].data = data;
 		i++;
 	}
 	return (1);
