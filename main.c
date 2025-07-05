@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 17:33:12 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/01 15:57:11 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/04 21:14:12 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,5 @@ int	main(int argc, char **argv)
 		pthread_join(data.philos[i].thread, NULL);
 		i++;
 	}
-	ft_error(NULL, 0, &data);
-	return (0);
+	return (ft_error(NULL, 0, &data));
 }

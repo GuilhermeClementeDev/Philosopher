@@ -6,18 +6,11 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 18:01:45 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/01 16:02:36 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/05 16:23:09 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	ft_print_error(char *msg, int nbr)
-{
-	ft_putstr_fd("Error :(\n", 2);
-	ft_putstr_fd(msg, 2);
-	return (nbr);
-}
 
 int	ft_isallnum(int argc, char **argv)
 {
@@ -100,6 +93,28 @@ int	ft_build_philos_data(t_data *data)
 		data->philos[i].left_fork = &data->forks[i];
 		data->philos[i].right_fork = &data->forks[(i + 1) % data->num_philos];
 		data->philos[i].data = data;
+		i++;
+	}
+	return (1);
+}
+
+int	ft_create_threads(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->num_philos)
+	{
+		if (pthread_create(&data->philos[i].thread, NULL, ft_routine, \
+&data->philos[i]) != 0)
+		{
+			pthread_mutex_lock(&data->start_mutex);
+			data->start = -1;
+			pthread_mutex_unlock(&data->start_mutex);
+			while (--i >= 0)
+				pthread_join(data->philos[i].thread, NULL);
+			return (0);
+		}
 		i++;
 	}
 	return (1);
