@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 18:01:45 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/05 16:23:09 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/06 17:24:48 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	build_data(t_data *data, int argc, char **argv)
 	data->someone_died = 0;
 	data->start = 0;
 	pthread_mutex_init(&data->start_mutex, NULL);
+	pthread_mutex_init(&data->print_mutex, NULL);
 }
 
 int	ft_create_forks(t_data *data)
@@ -93,6 +94,7 @@ int	ft_build_philos_data(t_data *data)
 		data->philos[i].left_fork = &data->forks[i];
 		data->philos[i].right_fork = &data->forks[(i + 1) % data->num_philos];
 		data->philos[i].data = data;
+		data->philos[i].first_round_done = 0;
 		i++;
 	}
 	return (1);

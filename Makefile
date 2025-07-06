@@ -12,7 +12,9 @@ LIBFT = $(LIB_DIR)/libft.a
 SRCS = \
 	main.c \
 	utilits_main.c \
-	threads_utilits.c \
+	simulation.c \
+	simulation2.c \
+	ft_error.c \
 
 OBJS = $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:23:35 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/05 16:24:26 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/06 17:26:53 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	ft_error(char *msg, int ret, t_data *data)
 		if (data->philos)
 			free(data->philos);
 		pthread_mutex_destroy(&data->start_mutex);
+		pthread_mutex_destroy(&data->print_mutex);
 	}
 	return (ret);
 }

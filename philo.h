@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 17:39:05 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/05 16:26:08 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/06 19:26:33 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 # include "./lib/libft.h"
 # include <pthread.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <sys/time.h>
 
 struct					s_philo;
 typedef struct s_philo	t_philo;
@@ -30,6 +34,7 @@ typedef struct s_data
 	int				someone_died;
 	int				start;
 	pthread_mutex_t	start_mutex;
+	pthread_mutex_t	print_mutex;
 	long long		start_time;
 	pthread_mutex_t	*forks;
 	t_philo			*philos;
@@ -40,6 +45,7 @@ typedef struct s_philo
 	int				id;
 	int				meals_eaten;
 	long long		last_meal_time;
+	int				first_round_done;
 	pthread_t		thread;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
@@ -47,16 +53,21 @@ typedef struct s_philo
 }	t_philo;
 
 // utilits_main
-int		ft_isallnum(int argc, char **argv);
-void	build_data(t_data *data, int argc, char **argv);
-int		ft_create_forks(t_data *data);
-int		ft_build_philos_data(t_data *data);
-int		ft_create_threads(t_data *data);
+int			ft_isallnum(int argc, char **argv);
+void		build_data(t_data *data, int argc, char **argv);
+int			ft_create_forks(t_data *data);
+int			ft_build_philos_data(t_data *data);
+int			ft_create_threads(t_data *data);
 
 // simulation
-void	*ft_routine(void *arg);
+void		*ft_routine(void *arg);
+int			ft_someone_died(t_philo *philo);
+
+// simulation 2
+void		ft_mutex_print(t_philo *philo, char *msg);
+long long	get_time(void);
 
 // error
-int		ft_error(char *msg, int ret, t_data *data);
+int			ft_error(char *msg, int ret, t_data *data);
 
 #endif
