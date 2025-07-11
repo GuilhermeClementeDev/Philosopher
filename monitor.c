@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:03:44 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/11 11:53:25 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/11 16:28:18 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ int	are_philos_full(t_data *data)
 	{
 		pthread_mutex_lock(&data->philos[i].mutex_meals);
 		if (data->philos[i].meals_eaten < data->num_times_must_eat)
+		{
+			pthread_mutex_unlock(&data->philos[i].mutex_meals);
 			return (0);
+		}
 		pthread_mutex_unlock(&data->philos[i].mutex_meals);
 		i++;
 	}
@@ -65,4 +68,5 @@ void	*ft_monitor(void *arg)
 			break ;
 		usleep(1000);
 	}
+	return (NULL);
 }

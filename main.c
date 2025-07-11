@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 17:33:12 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/06 18:25:27 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/11 16:27:08 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	main(int argc, char **argv)
 		return (ft_error("Initializing philosophers failed\n", 1, &data));
 	if (!ft_create_threads(&data))
 		return (ft_error("Creating threads failed\n", 1, &data));
+	if (pthread_create(&data.monitor, NULL, ft_monitor, &data) != 0)
+		return (ft_error("Creating monitor failed\n", 1, &data));
 	data.start_time = get_time();
 	pthread_mutex_lock(&data.start_mutex);
 	data.start = 1;
@@ -38,5 +40,6 @@ int	main(int argc, char **argv)
 		pthread_join(data.philos[i].thread, NULL);
 		i++;
 	}
+	pthread_join(data.monitor, NULL);
 	return (ft_error(NULL, 0, &data));
 }

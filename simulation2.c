@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 17:14:31 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/11 15:19:11 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/11 15:54:00 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,23 @@ int	ft_strcmp(const char *s1, const char *s2)
 		s2++;
 	}
 	return ((unsigned char)*s1 - (unsigned char)*s2);
+}
+void	ft_usleep(int ms, t_data *data)
+{
+	long long	start;
+
+	start = get_time();
+	while (get_time() - start < ms)
+	{
+		pthread_mutex_lock(&data->start_mutex);
+		if (data->someone_died)
+		{
+			pthread_mutex_unlock(&data->start_mutex);
+			break ;
+		}
+		pthread_mutex_unlock(&data->start_mutex);
+		usleep(100);
+	}
 }
 
 void	ft_mutex_print(t_philo *philo, char *msg)

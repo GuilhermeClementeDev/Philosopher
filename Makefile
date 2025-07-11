@@ -15,6 +15,7 @@ SRCS = \
 	simulation.c \
 	simulation2.c \
 	ft_error.c \
+	monitor.c \
 
 OBJS = $(SRCS:.c=.o)
 
@@ -34,7 +35,7 @@ $(LIBFT):
 valgrind: $(NAME)
 	valgrind --leak-check=full ./$(NAME) $(ARGS)
 helgrind: $(NAME)
-	$(VALGRIND) --tool=helgrind ./$(NAME) $(ARGS)
+	valgrind --tool=helgrind ./$(NAME) $(ARGS)
 
 clean:
 	@make -C $(LIB_DIR) clean

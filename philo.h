@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 17:39:05 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/11 11:55:19 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/11 16:26:50 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_data
 	long long		start_time;
 	pthread_mutex_t	*forks;
 	t_philo			*philos;
+	pthread_t		monitor;
 }	t_data;
 
 typedef struct s_philo
@@ -71,7 +72,9 @@ int			am_i_dead(t_philo *philo);
 // simulation 2
 void		ft_mutex_print(t_philo *philo, char *msg);
 long long	get_time(void);
+void		ft_usleep(int ms, t_data *data);
 
+void		*ft_monitor(void *arg);
 // error
 int			ft_error(char *msg, int ret, t_data *data);
 
