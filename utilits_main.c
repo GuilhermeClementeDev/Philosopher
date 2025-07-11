@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 18:01:45 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/10 22:43:57 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/11 11:53:09 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void	build_data(t_data *data, int argc, char **argv)
 	if (argc == 6)
 	{
 		data->has_meals_limit = 1;
-		data->num_times_each_must_eat = ft_atoi(argv[5]);
+		data->num_times_must_eat = ft_atoi(argv[5]);
 	}
 	else
 	{
 		data->has_meals_limit = 0;
-		data->num_times_each_must_eat = -1;
+		data->num_times_must_eat = -1;
 	}
 	data->someone_died = 0;
 	data->start = 0;

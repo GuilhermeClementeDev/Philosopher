@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 17:39:05 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/10 22:47:49 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/11 11:55:19 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int			ft_create_threads(t_data *data);
 // simulation
 void		*ft_routine(void *arg);
 int			ft_someone_died(t_philo *philo);
+int			am_i_dead(t_philo *philo);
 
 // simulation 2
 void		ft_mutex_print(t_philo *philo, char *msg);

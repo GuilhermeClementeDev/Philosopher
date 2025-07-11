@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 13:58:17 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/10 22:51:28 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/11 13:49:54 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	am_i_dead(t_philo *philo)
 	{
 		philo->im_dead = 1;
 		status = 1;
+		ft_mutex_print(philo, "died");
 	}
 	else
 		status = 0;
@@ -55,8 +56,10 @@ static int	take_forks(t_philo *philo)
 		ft_mutex_print(philo, "has taken a fork");
 		if (philo->data->num_philos == 1)
 		{
+			philo->im_dead = 1;
 			usleep(philo->data->time_die * 1000);
 			pthread_mutex_unlock(philo->left_fork);
+			ft_mutex_print(philo, "died");
 			return (0);
 		}
 		pthread_mutex_lock(philo->right_fork);
