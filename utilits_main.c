@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 18:01:45 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/06 17:24:48 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/10 22:43:57 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,10 @@ int	ft_build_philos_data(t_data *data)
 		data->philos[i].right_fork = &data->forks[(i + 1) % data->num_philos];
 		data->philos[i].data = data;
 		data->philos[i].first_round_done = 0;
+		data->philos[i].im_dead = 0;
+		data->philos[i].is_satisfied = 0;
+		pthread_mutex_init(&data->philos[i].mutex_im_dead, NULL);
+		pthread_mutex_init(&data->philos[i].mutex_meals, NULL);
 		i++;
 	}
 	return (1);

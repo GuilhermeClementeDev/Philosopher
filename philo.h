@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 17:39:05 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/06 19:26:33 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/10 22:47:49 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_data
 	int				time_die;
 	int				time_eat;
 	int				time_sleep;
-	int				num_times_each_must_eat;
+	int				num_times_must_eat;
 	int				has_meals_limit;
 	int				someone_died;
 	int				start;
@@ -46,9 +46,13 @@ typedef struct s_philo
 	int				meals_eaten;
 	long long		last_meal_time;
 	int				first_round_done;
+	int				im_dead;
+	int				is_satisfied;
 	pthread_t		thread;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
+	pthread_mutex_t	mutex_im_dead;
+	pthread_mutex_t	mutex_meals;
 	t_data			*data;
 }	t_philo;
 

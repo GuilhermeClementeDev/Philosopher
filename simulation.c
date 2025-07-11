@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 13:58:17 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/06 19:26:16 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/10 22:51:28 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,29 @@ int	ft_someone_died(t_philo *philo)
 	pthread_mutex_lock(&philo->data->start_mutex);
 	status = philo->data->someone_died;
 	pthread_mutex_unlock(&philo->data->start_mutex);
+	return (status);
+}
+
+int	am_i_dead(t_philo *philo)
+{
+	long long	now;
+	int			status;
+
+	now = get_time();
+	pthread_mutex_lock(&philo->mutex_im_dead);
+	if (philo->im_dead)
+	{
+		pthread_mutex_unlock(&philo->mutex_im_dead);
+		return (1);
+	}
+	if (now - philo->last_meal_time >= philo->data->time_die)
+	{
+		philo->im_dead = 1;
+		status = 1;
+	}
+	else
+		status = 0;
+	pthread_mutex_unlock(&philo->mutex_im_dead);
 	return (status);
 }
 
@@ -58,12 +81,29 @@ static void	drop_forks(t_philo *philo)
 
 void	eating(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->mutex_meals);
 	philo->last_meal_time = get_time();
 	ft_mutex_print(philo, "is eating");
 	philo->meals_eaten++;
 	usleep(philo->data->time_eat * 1000);
+	pthread_mutex_unlock(&philo->mutex_meals);
 }
+int	am_i_satisfied(t_philo *philo)
+{
+	int	status;
 
+	status = 0;
+	if (!philo->data->has_meals_limit)
+		return (status);
+	pthread_mutex_lock(&philo->mutex_meals);
+	if (philo->meals_eaten == philo->data->num_times_must_eat)
+		{
+			philo->is_satisfied = 1;
+			status++;
+		}
+	pthread_mutex_unlock(&philo->mutex_meals);
+	return (status);
+}
 void	*ft_routine(void *arg)
 {
 	t_philo	*philo;
@@ -80,14 +120,12 @@ void	*ft_routine(void *arg)
 	}
 	pthread_mutex_unlock(&philo->data->start_mutex);
 	philo->last_meal_time = get_time();
-	while (!ft_someone_died(philo))
+	while (!ft_someone_died(philo) && !am_i_dead(philo) && !am_i_satisfied(philo))
 	{
-		if (!take_forks(philo) || (philo->data->has_meals_limit && philo->data->num_times_each_must_eat == philo->meals_eaten))
+		if (!take_forks(philo))
 			break;
 		eating(philo);
 		drop_forks(philo);
-		if (ft_someone_died(philo))
-			break;
 		ft_mutex_print(philo, "is sleeping");
 		usleep(philo->data->time_sleep * 1000);
 		ft_mutex_print(philo, "is thinking");
