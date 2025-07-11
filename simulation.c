@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 13:58:17 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/11 13:49:54 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/11 15:27:08 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	am_i_dead(t_philo *philo)
 		pthread_mutex_unlock(&philo->mutex_im_dead);
 		return (1);
 	}
-	if (now - philo->last_meal_time >= philo->data->time_die)
+	if (now - philo->last_meal_time > philo->data->time_die)
 	{
 		philo->im_dead = 1;
 		status = 1;
