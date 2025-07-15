@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:03:44 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/11 16:28:18 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/15 16:03:19 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	monitoring_deaths(t_data *data)
 			pthread_mutex_lock(&data->start_mutex);
 			data->someone_died = 1;
 			pthread_mutex_unlock(&data->start_mutex);
+			ft_mutex_print(&data->philos[i], "died");
 			pthread_mutex_unlock(&data->philos[i].mutex_im_dead);
 			return (1);
 		}

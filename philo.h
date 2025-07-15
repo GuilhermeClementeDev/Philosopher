@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 17:39:05 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/11 16:26:50 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/15 17:46:45 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int			am_i_dead(t_philo *philo);
 // simulation 2
 void		ft_mutex_print(t_philo *philo, char *msg);
 long long	get_time(void);
-void		ft_usleep(int ms, t_data *data);
+void		ft_usleep(int ms, t_philo *philo);
 
 void		*ft_monitor(void *arg);
 // error
