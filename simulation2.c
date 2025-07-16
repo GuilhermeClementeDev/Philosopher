@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 17:14:31 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/15 17:59:05 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/16 12:34:40 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,18 @@ void	ft_mutex_print(t_philo *philo, char *msg)
 {
 	long long	time;
 
-	pthread_mutex_lock(&philo->data->print_mutex);
 	if (!ft_someone_died(philo) && !am_i_dead(philo))
 	{
+		pthread_mutex_lock(&philo->data->print_mutex);
 		time = get_time() - philo->data->start_time;
 		printf("%lld %d %s\n", time, philo->id + 1, msg);
+		pthread_mutex_unlock(&philo->data->print_mutex);
 	}
 	else if (ft_strcmp(msg, "died") == 0)
 	{
+		pthread_mutex_lock(&philo->data->print_mutex);
 		time = get_time() - philo->data->start_time;
 		printf("%lld %d %s\n", time, philo->id + 1, msg);
+		pthread_mutex_unlock(&philo->data->print_mutex);
 	}
-	pthread_mutex_unlock(&philo->data->print_mutex);
 }

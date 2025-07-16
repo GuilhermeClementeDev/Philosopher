@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 13:58:17 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/15 18:00:00 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/16 12:41:22 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ static int	take_forks(t_philo *philo)
 		if (philo->data->num_philos == 1)
 		{
 			pthread_mutex_lock(&philo->mutex_im_dead);
-			ft_usleep(philo->data->time_die, philo);
 			philo->im_dead = 1;
+			usleep(philo->data->time_die * 1000);
 			pthread_mutex_unlock(philo->left_fork);
 			pthread_mutex_unlock(&philo->mutex_im_dead);
 			return (0);
@@ -91,6 +91,8 @@ void	eating(t_philo *philo)
 	philo->meals_eaten++;
 	pthread_mutex_unlock(&philo->mutex_meals);
 	ft_usleep(philo->data->time_eat, philo);
+	if (am_i_dead(philo) || ft_someone_died(philo))
+		return ;
 	pthread_mutex_lock(&philo->mutex_meals);
 	philo->last_meal_time = get_time();
 	pthread_mutex_unlock(&philo->mutex_meals);
