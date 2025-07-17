@@ -6,14 +6,13 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 17:39:05 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/17 16:27:00 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/17 17:50:46 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include "./lib/libft.h"
 # include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -77,11 +76,12 @@ void		ft_usleep(int ms, t_philo *philo);
 void		*ft_monitor(void *arg);
 // error
 int			ft_error(char *msg, int ret, t_data *data);
-
+int			ft_simple_error(char *msg, int ret);
 //lib_func.c
-int		ft_strcmp(const char *s1, const char *s2);
-int		ft_atoi(const char *nptr);
-int		ft_isdigit(int c);
-void	ft_putstr_fd(char *s, int fd);
+int			ft_strcmp(const char *s1, const char *s2);
+int			ft_atoi(const char *nptr);
+int			ft_isdigit(int c);
+void		ft_putstr_fd(char *s, int fd);
+size_t		ft_strlen(const char *s);
 
 #endif

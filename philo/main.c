@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 17:33:12 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/15 17:34:10 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/17 17:49:56 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	main(int argc, char **argv)
 
 	i = 0;
 	if (argc < 5 || argc > 6)
-		return (ft_error("Invalid number of inputs\n", 1, NULL));
+		return (ft_simple_error("Invalid number of inputs\n", 1));
 	if (!ft_isallnum(argc, argv))
-		return (ft_error("All arguments must be positive numbers\n", 1, NULL));
+		return (ft_simple_error("All arguments must be positive numbers\n", 1));
 	build_data(&data, argc, argv);
 	if (!ft_create_forks(&data))
 		return (ft_error("Initializing mutex for fork\n", 1, &data));

@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 16:21:18 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/17 16:27:18 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/17 17:53:56 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	ft_atoi(const char *nptr)
 	}
 	return (result * neg);
 }
+
 int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
@@ -53,6 +54,7 @@ int	ft_isdigit(int c)
 	else
 		return (0);
 }
+
 void	ft_putstr_fd(char *s, int fd)
 {
 	write(fd, s, ft_strlen(s));

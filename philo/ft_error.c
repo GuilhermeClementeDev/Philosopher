@@ -6,12 +6,20 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:23:35 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/10 22:41:04 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/17 17:49:24 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
+int	ft_simple_error(char *msg, int ret)
+{
+	if (msg)
+	{
+		ft_putstr_fd("Error :(\n", 2);
+		ft_putstr_fd(msg, 2);
+	}
+	return (ret);
+}
 int	ft_error(char *msg, int ret, t_data *data)
 {
 	int	i;
