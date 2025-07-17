@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 17:39:05 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/15 17:46:45 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/17 16:27:00 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,11 @@ void		ft_usleep(int ms, t_philo *philo);
 void		*ft_monitor(void *arg);
 // error
 int			ft_error(char *msg, int ret, t_data *data);
+
+//lib_func.c
+int		ft_strcmp(const char *s1, const char *s2);
+int		ft_atoi(const char *nptr);
+int		ft_isdigit(int c);
+void	ft_putstr_fd(char *s, int fd);
 
 #endif

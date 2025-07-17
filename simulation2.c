@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 17:14:31 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/17 15:07:32 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/17 16:23:09 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,6 @@ long long	get_time(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	while (*s1 && (*s1 == *s2))
-	{
-		s1++;
-		s2++;
-	}
-	return ((unsigned char)*s1 - (unsigned char)*s2);
-}
 void	ft_usleep(int ms, t_philo *philo)
 {
 	long long	start;
