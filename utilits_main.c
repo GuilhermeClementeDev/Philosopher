@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 18:01:45 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/11 11:53:09 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/17 15:53:20 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,9 @@ int	ft_build_philos_data(t_data *data)
 		data->philos[i].is_satisfied = 0;
 		pthread_mutex_init(&data->philos[i].mutex_im_dead, NULL);
 		pthread_mutex_init(&data->philos[i].mutex_meals, NULL);
+		pthread_mutex_lock(&data->philos[i].mutex_meals);
+		data->philos[i].last_meal_time = get_time();
+		pthread_mutex_unlock(&data->philos[i].mutex_meals);
 		i++;
 	}
 	return (1);

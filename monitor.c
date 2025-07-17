@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:03:44 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/15 16:03:19 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/17 16:00:40 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,29 @@ int	are_philos_full(t_data *data)
 
 int	monitoring_deaths(t_data *data)
 {
-	int	i;
+	int			i;
+	long long	now;
 
 	i = 0;
 	while (i < data->num_philos)
 	{
+		pthread_mutex_lock(&data->philos[i].mutex_meals);
 		pthread_mutex_lock(&data->philos[i].mutex_im_dead);
-		if (data->philos[i].im_dead)
+		now = get_time();
+		if (!data->philos[i].im_dead
+			&& now - data->philos[i].last_meal_time > data->time_die)
 		{
+			pthread_mutex_unlock(&data->philos[i].mutex_meals);
+			data->philos[i].im_dead = 1;
+			pthread_mutex_unlock(&data->philos[i].mutex_im_dead);
 			pthread_mutex_lock(&data->start_mutex);
 			data->someone_died = 1;
 			pthread_mutex_unlock(&data->start_mutex);
 			ft_mutex_print(&data->philos[i], "died");
-			pthread_mutex_unlock(&data->philos[i].mutex_im_dead);
 			return (1);
 		}
 		pthread_mutex_unlock(&data->philos[i].mutex_im_dead);
+		pthread_mutex_unlock(&data->philos[i].mutex_meals);
 		i++;
 	}
 	return (0);
