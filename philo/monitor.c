@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:03:44 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/17 16:00:40 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/18 13:10:17 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	monitoring_deaths(t_data *data)
 	long long	now;
 
 	i = 0;
+	if (data->num_philos == 1)
+		return (1);
 	while (i < data->num_philos)
 	{
 		pthread_mutex_lock(&data->philos[i].mutex_meals);

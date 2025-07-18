@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 13:58:17 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/17 17:56:04 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/18 13:09:33 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static int	take_forks(t_philo *philo)
 			pthread_mutex_unlock(&philo->mutex_im_dead);
 			usleep(philo->data->time_die * 1000);
 			pthread_mutex_unlock(philo->left_fork);
+			ft_mutex_print(philo, "died");
 			return (0);
 		}
 		pthread_mutex_lock(philo->right_fork);
