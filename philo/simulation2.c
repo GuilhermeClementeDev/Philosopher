@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 17:14:31 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/17 16:23:09 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/20 11:56:14 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_usleep(int ms, t_philo *philo)
 		}
 		pthread_mutex_unlock(&philo->data->start_mutex);
 		if (am_i_dead(philo) || ft_someone_died(philo))
-			break;
+			break ;
 		usleep(250);
 	}
 }
