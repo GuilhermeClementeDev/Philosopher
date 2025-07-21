@@ -6,13 +6,13 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:03:44 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/20 11:37:03 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/21 10:45:43 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	are_philos_full(t_data *data)
+static int	are_philos_full(t_data *data)
 {
 	int	i;
 
@@ -45,7 +45,7 @@ static int	handle_philo_death(t_data *data, t_philo *philo)
 	return (1);
 }
 
-int	monitoring_deaths(t_data *data)
+static int	monitoring_deaths(t_data *data)
 {
 	int			i;
 	long long	now;

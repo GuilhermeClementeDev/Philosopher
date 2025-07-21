@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 16:21:18 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/17 17:53:56 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/21 10:43:59 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,6 @@ int	ft_isdigit(int c)
 		return (0);
 }
 
-void	ft_putstr_fd(char *s, int fd)
-{
-	write(fd, s, ft_strlen(s));
-}
-
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;
@@ -68,4 +63,9 @@ size_t	ft_strlen(const char *s)
 	while (s[i])
 		i++;
 	return (i);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	write(fd, s, ft_strlen(s));
 }

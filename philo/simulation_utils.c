@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 17:14:31 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/20 11:56:14 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/21 10:41:47 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,22 @@ void	ft_mutex_print(t_philo *philo, char *msg)
 		printf("%lld %d %s\n", time, philo->id + 1, msg);
 		pthread_mutex_unlock(&philo->data->print_mutex);
 	}
+}
+
+int	wait_for_start(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data->start_mutex);
+	while (philo->data->start <= 0)
+	{
+		if (philo->data->start == -1)
+		{
+			pthread_mutex_unlock(&philo->data->start_mutex);
+			return (0);
+		}
+		pthread_mutex_unlock(&philo->data->start_mutex);
+		usleep(100);
+		pthread_mutex_lock(&philo->data->start_mutex);
+	}
+	pthread_mutex_unlock(&philo->data->start_mutex);
+	return (1);
 }

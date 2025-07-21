@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 17:39:05 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/17 17:50:46 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/21 11:00:37 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,32 +56,38 @@ typedef struct s_philo
 	t_data			*data;
 }	t_philo;
 
-// utilits_main
+// ft_error.c
+int			ft_simple_error(char *msg, int ret);
+int			ft_error(char *msg, int ret, t_data *data);
+
+// lib_func.c
+int			ft_strcmp(const char *s1, const char *s2);
+int			ft_atoi(const char *nptr);
+int			ft_isdigit(int c);
+void		ft_putstr_fd(char *s, int fd);
+
+// monitor.c
+void		*ft_monitor(void *arg);
+
+// simulation.c
+void		*ft_routine(void *arg);
+
+// simulation_utils.c
+long long	get_time(void);
+void		ft_usleep(int ms, t_philo *philo);
+void		ft_mutex_print(t_philo *philo, char *msg);
+int			wait_for_start(t_philo *philo);
+
+// utilits_main.c
 int			ft_isallnum(int argc, char **argv);
 void		build_data(t_data *data, int argc, char **argv);
 int			ft_create_forks(t_data *data);
 int			ft_build_philos_data(t_data *data);
 int			ft_create_threads(t_data *data);
 
-// simulation
-void		*ft_routine(void *arg);
+// philo_verifications.c
 int			ft_someone_died(t_philo *philo);
 int			am_i_dead(t_philo *philo);
-
-// simulation 2
-void		ft_mutex_print(t_philo *philo, char *msg);
-long long	get_time(void);
-void		ft_usleep(int ms, t_philo *philo);
-
-void		*ft_monitor(void *arg);
-// error
-int			ft_error(char *msg, int ret, t_data *data);
-int			ft_simple_error(char *msg, int ret);
-//lib_func.c
-int			ft_strcmp(const char *s1, const char *s2);
-int			ft_atoi(const char *nptr);
-int			ft_isdigit(int c);
-void		ft_putstr_fd(char *s, int fd);
-size_t		ft_strlen(const char *s);
+int			am_i_satisfied(t_philo *philo);
 
 #endif

@@ -9,10 +9,11 @@ SRCS = \
 	main.c \
 	utilits_main.c \
 	simulation.c \
-	simulation2.c \
+	simulation_utils.c \
 	ft_error.c \
 	monitor.c \
 	lib_func.c \
+	philo_verifications.c \
 
 OBJS = $(SRCS:.c=.o)
 
