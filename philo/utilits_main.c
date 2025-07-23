@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 18:01:45 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/17 15:53:20 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/23 11:53:12 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	ft_isallnum(int argc, char **argv)
 		i = 0;
 		if (argv[size - 1][i] == '+')
 			i++;
+		if (argv[size - 1][i] == '0' && !argv[size - 1][i + 1])
+			return (0);
 		while (argv[size - 1][i])
 		{
 			if (!ft_isdigit(argv[size - 1][i]))

@@ -6,7 +6,7 @@
 /*   By: guclemen <guclemen@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:03:44 by guclemen          #+#    #+#             */
-/*   Updated: 2025/07/21 10:45:43 by guclemen         ###   ########.fr       */
+/*   Updated: 2025/07/23 11:49:56 by guclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	monitoring_deaths(t_data *data)
 		pthread_mutex_lock(&data->philos[i].mutex_meals);
 		pthread_mutex_lock(&data->philos[i].mutex_im_dead);
 		now = get_time();
-		if (!data->philos[i].im_dead
+		if (!data->philos[i].im_dead && !data->philos[i].is_satisfied
 			&& now - data->philos[i].last_meal_time > data->time_die)
 			return (handle_philo_death(data, &data->philos[i]));
 		pthread_mutex_unlock(&data->philos[i].mutex_im_dead);
